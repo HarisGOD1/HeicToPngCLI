@@ -19,6 +19,6 @@ class ConvertingService() {
         libheifConverter.performConvert(inputFilePath,outputFilePath)
 
     }
-
+    // todo: make resizing
 
 }

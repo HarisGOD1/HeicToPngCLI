@@ -11,13 +11,12 @@ import kotlin.text.iterator
 class LibheifHeicToPngConverter(
     @Value("\${ru.thegod.path-to-images}")
     private var defaultImagesDir: String)
-    :
-    HeicToPngConverter{
+    :HeicToPngConverter{
 
     private val badSymbols = " \n\r\t&\\"
 
     override fun convert(inputFilePath: String, outputFilePath: String) {
-        TODO("Not yet implemented")
+        performConvert(inputFilePath,outputFilePath)
     }
 
     fun performConvertInDefaultFolder(filename: String){
