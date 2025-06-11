@@ -12,15 +12,18 @@ class LibheifConverterCoroutine {
 
 
 
-    fun performConvertAsCoroutine(inputFilePath: String,outputFilePath: String){
-        var command = libheifHeicToPngConverter.getHeifCommand(inputFilePath,outputFilePath)
+    suspend fun performConvertAsCoroutine(filename: String){
 
-        Thread{
+        var command = libheifHeicToPngConverter.getHeifCommand(
+            libheifHeicToPngConverter.getDefaultInputPathFromFilename(filename),
+            libheifHeicToPngConverter.getDefaultOutputPathFromFilename(filename))
+
+
             runCoroutineCommand(command)
         }
-    }
 
-    fun runCoroutineCommand(command: String,
+
+    suspend fun runCoroutineCommand(command: String,
                    workingDir: File = File("."),
                    timeoutAmount: Long = 60,
                    timeoutUnit: TimeUnit = TimeUnit.SECONDS

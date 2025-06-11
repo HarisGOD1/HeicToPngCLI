@@ -29,5 +29,13 @@ class LibheifConvertertingController {
         return HttpResponse.created("Test performed, time took ${millisecondsEnd-millisecondsStart}ms")
     }
 
+    @Get("/test/coroutine")
+    suspend fun performConvertCoroutine(): HttpResponse<String>{
+        val millisecondsStart = System.currentTimeMillis()
+        convertingService.performConvertCoroutine("IMG_8497.HEIC")
+        val millisecondsEnd = System.currentTimeMillis()
+
+        return HttpResponse.created("Test performed, time took ${millisecondsEnd-millisecondsStart}ms")
+    }
 
 }

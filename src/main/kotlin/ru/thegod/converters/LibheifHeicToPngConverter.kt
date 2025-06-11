@@ -1,6 +1,7 @@
 package ru.thegod.converters
 
 import io.micronaut.context.annotation.Value
+import jakarta.inject.Inject
 import jakarta.inject.Singleton
 import java.io.File
 import java.util.concurrent.TimeUnit
@@ -15,6 +16,8 @@ class LibheifHeicToPngConverter(
     :HeicToPngConverter{
 
     private val badSymbols = " \n\r\t&\\"
+
+
 
     override fun convert(inputFilePath: String, outputFilePath: String) {
         performConvert(inputFilePath,outputFilePath)
@@ -46,11 +49,11 @@ class LibheifHeicToPngConverter(
 
     }
 
-    private fun getDefaultInputPathFromFilename(filename: String): String{
+    fun getDefaultInputPathFromFilename(filename: String): String{
         return "$defaultImagesDir/HEIC/$filename"
     }
-    private fun getDefaultOutputPathFromFilename(filename: String): String{
-        return "$defaultImagesDir/PNG/${filename}_conv.png"
+    fun getDefaultOutputPathFromFilename(filename: String): String{
+        return "$defaultImagesDir/JPG/${filename}_conv.jpg"
     }
 
 
