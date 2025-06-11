@@ -17,4 +17,12 @@ class LibheifHeicToPngConverterTest {
 
 
     }
+
+    @Test
+    fun `profilling test`(){
+        for(i in 0..40000)
+            libheifHeicToPngConverter.performConvertInDefaultFolder("IMG_8497.HEIC")
+
+
+    }
 }

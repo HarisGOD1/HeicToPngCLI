@@ -4,8 +4,9 @@ import io.micronaut.context.annotation.Value
 import jakarta.inject.Singleton
 import java.io.File
 import java.util.concurrent.TimeUnit
-import kotlin.system.measureTimeMillis
 import kotlin.text.iterator
+import kotlinx.coroutines.*
+
 
 @Singleton
 class LibheifHeicToPngConverter(
@@ -27,10 +28,8 @@ class LibheifHeicToPngConverter(
     fun performConvert(inputFilePath: String,outputFilePath: String){
         var command = getHeifCommand(inputFilePath,outputFilePath)
 
-        val timeInMillis = measureTimeMillis {
-            runCommand(command)
-        }
-        println(timeInMillis)
+        runCommand(command)
+
     }
 
     private fun isVulnerable(filename: String): Boolean {
@@ -40,7 +39,7 @@ class LibheifHeicToPngConverter(
     }
 
     // todo: throw illegalArgException and handle
-    private fun getHeifCommand(inputFilePath: String, outputFilePath: String): String {
+    fun getHeifCommand(inputFilePath: String, outputFilePath: String): String {
         if(isVulnerable(inputFilePath)) return ""
         if(isVulnerable(outputFilePath)) return ""
         return "heif-convert $inputFilePath $outputFilePath"
